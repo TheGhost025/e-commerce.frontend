@@ -22,8 +22,14 @@ const Login = () =>
             }
         );
 
+        localStorage.setItem('token', response.data.token);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+
             // Handle successful login
             console.log('Login successful:', response.data);
+            if(response.data.isSupplier){
+              navigate("/supplier/dashboard");
+            }
         }
         catch(err){
             console.error('Login failed:', err.response?.data || err.message);
