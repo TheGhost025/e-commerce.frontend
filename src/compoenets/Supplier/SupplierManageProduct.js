@@ -11,7 +11,13 @@ const SupplierManageProduct = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get("https://localhost:44305/api/Products"); // Replace with your API route
+                const token = localStorage.getItem('token');
+                const response = await axios.get("https://localhost:44305/api/Products", {
+                    headers: {
+                      'Content-Type': 'multipart/form-data',
+                      'Authorization': `Bearer ${token}`
+                    }
+                  }); // Replace with your API route
                 setProducts(response.data);
             } catch (error) {
                 console.error("Error fetching products:", error);
@@ -24,7 +30,13 @@ const SupplierManageProduct = () => {
     // Handle product deletion
     const handleDelete = async (productId) => {
         try {
-            await axios.delete(`https://localhost:44305/api/Products/${productId}`);
+            const token = localStorage.getItem('token');
+            await axios.delete(`https://localhost:44305/api/Products/${productId}`, {
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                  'Authorization': `Bearer ${token}`
+                }
+              });
             setProducts(products.filter(product => product.id !== productId));
         } catch (error) {
             console.error("Error deleting product:", error);

@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from 'axios';
 import "../css/Auth.css";
@@ -9,6 +9,14 @@ const Login = () =>
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [error, setError] = useState('');
+
+    // Retrieve token from localStorage and set default Axios header on component mount
+    useEffect(() => {
+      const token = localStorage.getItem('token');
+      if (token) {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      }
+      }, []);
 
     const handleLogIn = async (e) => {
         e.preventDefault();
