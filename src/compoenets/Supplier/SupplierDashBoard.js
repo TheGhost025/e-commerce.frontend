@@ -1,73 +1,34 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import SupplierNavBar from './SupplierNavBar';
 
-const SupplierDashboard = () => {
-    const [products, setProducts] = useState([]);
-    const navigate = useNavigate();
-
-    // Fetch the supplier's products when the component mounts
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const response = await axios.get("https://localhost:44305/api/Products"); // Replace with your API route
-                setProducts(response.data);
-            } catch (error) {
-                console.error("Error fetching products:", error);
-            }
-        };
-
-        fetchProducts();
-    }, []);
-
-    // Handle product deletion
-    const handleDelete = async (productId) => {
-        try {
-            await axios.delete(`https://localhost:44305/api/Products/${productId}`);
-            setProducts(products.filter(product => product.id !== productId));
-        } catch (error) {
-            console.error("Error deleting product:", error);
-        }
-    };
-
-    // Navigate to the edit product page
-    const handleEdit = (productId) => {
-        navigate(`/supplier/editproduct/${productId}`);
-    };
-
-    // Navigate to the add product page
-    const handleAddProduct = () => {
-        navigate("/supplier/addproduct");
-    };
-
-    return (
-        <div>
-            <h2>Supplier Dashboard</h2>
-            <button onClick={handleAddProduct}>Add New Product</button>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Price</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {products.map(product => (
-                        <tr key={product.id}>
-                            <td>{product.name}</td>
-                            <td>{product.price}</td>
-                            <td>
-                                <button onClick={() => handleEdit(product.id)}>Edit</button>
-                                <button onClick={() => handleDelete(product.id)}>Delete</button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+const SupplierDashBoard = () => {
+  return (
+    <SupplierNavBar>
+        <div className="container mt-4">
+            <h2 className="text-center">Supplier Dashboard</h2>
+            <div className="row">
+            <div className="col-md-6">
+                <div className="card">
+                <div className="card-body">
+                    <h5 className="card-title">Manage Products</h5>
+                    <p className="card-text">Add, edit, or remove products from your inventory.</p>
+                    <a href="/supplier/manageProduct" className="btn btn-primary">Manage Products</a>
+                </div>
+                </div>
+            </div>
+            <div className="col-md-6">
+                <div className="card">
+                <div className="card-body">
+                    <h5 className="card-title">Add New Product</h5>
+                    <p className="card-text">Add new products to your store.</p>
+                    <a href="/supplier/addproduct" className="btn btn-success">Add Product</a>
+                </div>
+                </div>
+            </div>
+            </div>
         </div>
-    );
+    </SupplierNavBar>
+  );
 };
 
-export default SupplierDashboard;
+export default SupplierDashBoard;

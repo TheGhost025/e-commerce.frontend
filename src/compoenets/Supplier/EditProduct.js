@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import SupplierNavBar from './SupplierNavBar';
 
 const EditProduct = () => {
   const { id } = useParams();
@@ -43,36 +44,37 @@ const EditProduct = () => {
   };
 
   return (
-    <div>
-      <h2>Edit Product</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label>
-          <input type="text" name="name" value={product.name} onChange={handleInputChange} />
-        </div>
-        <div>
-          <label>Description:</label>
-          <input type="text" name="description" value={product.description} onChange={handleInputChange} />
-        </div>
-        <div>
-          <label>Category:</label>
-          <input type="text" name="category" value={product.category} onChange={handleInputChange} />
-        </div>
-        <div>
-          <label>Price:</label>
-          <input type="number" name="price" value={product.price} onChange={handleInputChange} />
-        </div>
-        <div>
-          <label>Stock:</label>
-          <input type="number" name="stock" value={product.stock} onChange={handleInputChange} />
-        </div>
-        <div>
-          <label>Image URL:</label>
-          <input type="text" name="imageURL" value={product.imageURL} onChange={handleInputChange} />
-        </div>
-        <button type="submit">Save Changes</button>
-      </form>
-    </div>
+    <SupplierNavBar> 
+      <div className="container mt-4">
+        <form onSubmit={handleSubmit}>
+          <div className="form-group mb-3">
+            <label htmlFor="name">Name:</label>
+            <input type="text" name="name" className="form-control" value={product.name} onChange={handleInputChange} />
+          </div>
+          <div className="form-group mb-3">
+            <label htmlFor="description">Description:</label>
+            <input type="text" name="description" className="form-control" value={product.description} onChange={handleInputChange} />
+          </div>
+          <div className="form-group mb-3">
+            <label htmlFor="category">Category:</label>
+            <input type="text" name="category" className="form-control" value={product.category} onChange={handleInputChange} />
+          </div>
+          <div className="form-group mb-3">
+            <label htmlFor="price">Price:</label>
+            <input type="number" name="price" className="form-control" value={product.price} onChange={handleInputChange} />
+          </div>
+          <div className="form-group mb-3">
+            <label htmlFor="stock">Stock:</label>
+            <input type="number" name="stock" className="form-control" value={product.stock} onChange={handleInputChange} />
+          </div>
+          <div className="form-group mb-3">
+            <label htmlFor="imageURL">Image URL:</label>
+            <input type="text" name="imageURL" className="form-control" value={product.imageURL} onChange={handleInputChange} />
+          </div>
+          <button type="submit" className="btn btn-primary">Save Changes</button>
+        </form>
+      </div>
+  </SupplierNavBar>
   );
 };
 
