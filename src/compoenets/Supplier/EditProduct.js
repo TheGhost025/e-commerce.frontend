@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import SupplierNavBar from './SupplierNavBar';
 
 const EditProduct = () => {
   const { id } = useParams();
+  const fileInputRef = useRef(null);
   const navigate = useNavigate();
 
   const [product, setProduct] = useState({
@@ -13,24 +14,37 @@ const EditProduct = () => {
     category: '',
     price: '',
     stock: '',
-    image: null // Image is initially null
+    image: null, // Image is initially null
+    imageURL: ''
   });
 
   useEffect(() => {
     // Fetch the product to edit
     axios.get(`https://localhost:44305/api/Products/${id}`)
       .then(response => {
-        setProduct(response.data);
+        setProduct({
+          ...response.data,
+          imageURL: `https://localhost:44305${response.data.imageURL}` // Assuming `imageURL` comes from the API
+        });
       })
       .catch(error => {
         console.error('There was an error fetching the product!', error);
       });
   }, [id]);
 
+  // Trigger the file input click when the image is clicked
+  const handleImageClick = () => {
+    fileInputRef.current.click();
+  };
+
   const handleFileChange = (e) => {
     // Set the selected file in the state
     const file = e.target.files[0];
-    setProduct({ ...product, image: file });
+    setProduct({
+      ...product,
+      image: file,
+      imageURL: URL.createObjectURL(file) // Preview the newly selected image
+    });
   };
 
   const handleInputChange = (e) => {
@@ -95,7 +109,20 @@ const EditProduct = () => {
           </div>
           <div className="mb-3">
             <label className="form-label">Image</label>
-            <input type="file" className="form-control" onChange={handleFileChange} />
+            <div onClick={handleImageClick} style={{ cursor: 'pointer' }}>
+              <img
+                src={product.imageURL || 'default-image-url.jpg'} // Fallback for no image
+                alt="Profile"
+                style={{ width: '150px', height: '150px', objectFit: 'cover', borderRadius: '50%' }}
+              />
+            </div>
+            <input
+              type="file"
+              ref={fileInputRef}
+              style={{ display: 'none' }}
+              accept="image/*"
+              onChange={handleFileChange}
+            />
           </div>
           <button type="submit" className="btn btn-primary">Save Changes</button>
         </form>

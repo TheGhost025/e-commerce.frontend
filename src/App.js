@@ -6,6 +6,8 @@ import AddProduct from './compoenets/Supplier/AddProduct';
 import EditProduct from './compoenets/Supplier/EditProduct';
 import SupplierManageProduct from './compoenets/Supplier/SupplierManageProduct';
 import SupplierDashBoard from './compoenets/Supplier/SupplierDashBoard';
+import ProfileSupplierUpdate from './compoenets/Supplier/ProfileSupplierUpdate';
+import ProductDetailsSupplier from './compoenets/Supplier/ProductDetailsSupplier';
 
 const App = () => {
   return (
@@ -14,8 +16,10 @@ const App = () => {
       <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/supplier/update-profile" element={<ProfileSupplierUpdate />}/>
         <Route path="/supplier/dashboard" element={<SupplierDashBoard />}/>
         <Route path="/supplier/manageProduct" element={<SupplierManageProduct />}/>
+        <Route path="/supplier/products/:productId" element={<ProductDetailsSupplier />} />
         <Route path="/supplier/addproduct" element={<AddProduct />}/>
         <Route path="/supplier/editproduct/:id" element={<EditProduct />}/>
       </Routes>

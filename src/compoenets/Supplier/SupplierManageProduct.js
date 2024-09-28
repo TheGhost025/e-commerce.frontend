@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import SupplierNavBar from "./SupplierNavBar";
 
 const SupplierManageProduct = () => {
@@ -62,6 +62,9 @@ const SupplierManageProduct = () => {
                 <thead>
                     <tr>
                     <th>Product Name</th>
+                    <th>Product Image</th>
+                    <th>Category</th>
+                    <th>Stock</th>
                     <th>Price</th>
                     <th>Actions</th>
                     </tr>
@@ -70,8 +73,20 @@ const SupplierManageProduct = () => {
                     {products.map((product) => (
                     <tr key={product.id}>
                         <td>{product.name}</td>
+                        <td>              
+                            <img
+                            src={`https://localhost:44305${product.imageURL}`}
+                            alt="ProductImage"
+                            style={{ width: '40px', height: '40px', borderRadius: '50%', marginRight: '10px' }}
+                        />
+                        </td>
+                        <td>{product.category}</td>
+                        <td>{product.stock}</td>
                         <td>{product.price}</td>
                         <td>
+                        <Link to={`/supplier/products/${product.id}`} className="btn btn-info me-2">
+                        View Details
+                        </Link>
                         <button className="btn btn-primary me-2" onClick={() => handleEdit(product.id)}>Edit</button>
                         <button className="btn btn-danger" onClick={() => handleDelete(product.id)}>Delete</button>
                         </td>

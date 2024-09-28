@@ -1,15 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link , useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 const SupplierNavBar = ({ children }) => {
   const navigate = useNavigate();
+  const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    profileImageUrl: ''
+  });
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    // Fetch the current user data
+    axios.get('https://localhost:44305/api/Account/profile', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(response => {
+        setUser({
+          firstName: response.data.firstName,
+          lastName: response.data.lastName,
+          profileImageUrl: "https://localhost:44305"+ response.data.profileImageURL || 'default-image-url.jpg' // Fallback image
+        });
+      })
+      .catch(err => {
+        console.error('Error fetching profile data', err);
+      });
+  }, []);
 
   const handleLogout = async (e) => 
     {
-
       e.preventDefault();
-
       try
       {
         const token = localStorage.getItem('token');
@@ -53,9 +76,21 @@ const SupplierNavBar = ({ children }) => {
                 <Link className="nav-link" to="/supplier/manageProduct">Manage Products</Link>
               </li>
               <li className="nav-item">
-                <button className="nav-link" onClick={handleLogout}>Logout</button>
+                <Link className="nav-link" to="/supplier/update-profile">Update Profile</Link>
               </li>
             </ul>
+              <div className="d-flex align-items-center">
+              {/* Profile Image and Name */}
+              <img
+                src={user.profileImageUrl}
+                alt="Profile"
+                style={{ width: '40px', height: '40px', borderRadius: '50%', marginRight: '10px' }}
+              />
+              <span className="navbar-text">
+                {user.firstName} {user.lastName}
+              </span>
+              <button className="btn btn-outline-danger ms-3" onClick={handleLogout}>Logout</button>
+            </div>
           </div>
         </div>
       </nav>
