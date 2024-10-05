@@ -38,6 +38,9 @@ const Login = () =>
             if(response.data.isSupplier){
               navigate("/supplier/dashboard");
             }
+            else{
+              navigate("/customer");
+            }
         }
         catch(err){
             console.error('Login failed:', err.response?.data || err.message);
