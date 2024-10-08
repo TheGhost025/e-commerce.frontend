@@ -27,23 +27,47 @@ const ProductDetailsCustomer = () => {
     return <div>Loading product details...</div>;
   }
 
+  const addToCart = async () => {
+    const token = localStorage.getItem('token'); // Assume you store JWT in localStorage
+    const formData = new FormData();
+    formData.append('ProductId', product.id);
+    formData.append('Quantity', 1);
+    try {
+      const response = await axios.post(
+        'https://localhost:44305/api/cart/add',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      alert('Product added to cart');
+    } catch (error) {
+      console.error('Error adding product to cart:', error);
+      alert('Failed to add product to cart');
+    }
+  };
+  
+
   return (
     <CustomerNavBar>
-      <div className="container mt-4">
-        <h1>Product Details</h1>
-        <div className="card">
-          <div className="card-body">
-            <h5 className="card-title">{product.name}</h5>
-            <p className="card-text"><strong>Description:</strong> {product.description}</p>
-            <p className="card-text"><strong>Category:</strong> {product.category}</p>
-            <p className="card-text"><strong>Price:</strong> ${product.price}</p>
-            <p className="card-text"><strong>Stock:</strong> {product.stock}</p>
-            {product.imageURL && (
-              <img src={`https://localhost:44305${product.imageURL}`} alt={product.name} style={{ width: '200px', height: '200px' }} />
-            )}
-          </div>
+    <div className="container mt-4">
+      <h1>{product.name}</h1>
+      <div className="row">
+        <div className="col-md-6">
+          <img src={"https://localhost:44305"+product.imageURL} alt={product.name} className="img-fluid" />
+        </div>
+        <div className="col-md-6">
+          <h2>Price: ${product.price}</h2>
+          <p>{product.description}</p>
+          <p>{product.stock}</p>
+
+          <button className="btn btn-primary" onClick={addToCart}>Add to Cart</button>
         </div>
       </div>
+    </div>
     </CustomerNavBar>
   );
 };

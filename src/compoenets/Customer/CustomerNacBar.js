@@ -78,7 +78,7 @@ const CustomerNavBar = ({ children }) => {
 
             {/* Cart */}
             <li className="nav-item">
-              <Link className="nav-link" to="/cart">Cart</Link>
+              <Link className="nav-link" to="/customer/cart">Cart</Link>
             </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/customer/update-profile">Update Profile</Link>
