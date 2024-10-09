@@ -6,6 +6,7 @@ import CustomerNavBar from './CustomerNacBar';
 const ProductDetailsCustomer = () => {
   const { productId } = useParams(); // Get the product ID from the route
   const [product, setProduct] = useState(null);
+  const [quantity, setQuantity] = useState(1);
   const token = localStorage.getItem('token'); // Assuming token is stored in localStorage
 
   useEffect(() => {
@@ -31,7 +32,7 @@ const ProductDetailsCustomer = () => {
     const token = localStorage.getItem('token'); // Assume you store JWT in localStorage
     const formData = new FormData();
     formData.append('ProductId', product.id);
-    formData.append('Quantity', 1);
+    formData.append('Quantity', quantity);
     try {
       const response = await axios.post(
         'https://localhost:44305/api/cart/add',
@@ -64,7 +65,16 @@ const ProductDetailsCustomer = () => {
           <p>{product.description}</p>
           <p>{product.stock}</p>
 
-          <button className="btn btn-primary" onClick={addToCart}>Add to Cart</button>
+          <label htmlFor="quantity">Quantity:</label>
+          <input
+            id="quantity"
+            type="number"
+            min="1"
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+          />
+
+          <button onClick={addToCart}>Add to Cart</button>
         </div>
       </div>
     </div>

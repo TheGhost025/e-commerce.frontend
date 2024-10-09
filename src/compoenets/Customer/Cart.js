@@ -23,6 +23,36 @@ const Cart = () => {
     fetchCartItems();
   }, []);
 
+  const updateQuantity = async (cartItemId, newQuantity) => {
+    try {
+      const token = localStorage.getItem('token');
+      const formData = new FormData();
+      formData.append('ProductId', cartItemId);
+      formData.append('Quantity', newQuantity);
+      await axios.put(
+        'https://localhost:44305/api/cart/updateQuantity',
+        formData
+        ,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`,
+          }
+        }
+      );
+      // Update cartItems state after successful update
+      setCartItems((prevItems) =>
+        prevItems.map((item) =>
+          item.cartItemId === cartItemId
+            ? { ...item, quantity: newQuantity }
+            : item
+        )
+      );
+    } catch (error) {
+      console.error('Error updating cart item quantity:', error);
+    }
+  };
+
   return (
     <CustomerNavBar>
       <div className="container mt-4">
@@ -45,6 +75,20 @@ const Cart = () => {
                     <p className="card-text">
                       Price: <strong>${item.price}</strong>
                     </p>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <label htmlFor={`quantity-${item.cartItemId}`}>Quantity:</label>
+                      <input
+                        id={`quantity-${item.cartItemId}`}
+                        type="number"
+                        min="1"
+                        value={item.quantity}
+                        onChange={(e) =>
+                          updateQuantity(item.cartItemId, e.target.value)
+                        }
+                        className="form-control"
+                        style={{ width: '60px' }}
+                      />
+                    </div>
                     <button className="btn btn-danger mt-auto">Remove from Cart</button>
                   </div>
                 </div>

@@ -48,7 +48,7 @@ const Home = () => {
         {filteredProducts.map(product => (
           <div key={product.id} className="col-md-4 mb-4">
             <div className="card">
-              <img src={product.imageUrl || 'default-image-url.jpg'} alt={product.name} className="card-img-top" />
+              <img src={`https://localhost:44305${product.imageURL}` || 'default-image-url.jpg'} alt={product.name} className="card-img-top" />
               <div className="card-body">
                 <h5 className="card-title">{product.name}</h5>
                 <p className="card-text">{product.description}</p>
