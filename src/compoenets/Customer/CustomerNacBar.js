@@ -80,6 +80,10 @@ const CustomerNavBar = ({ children }) => {
             <li className="nav-item">
               <Link className="nav-link" to="/customer/cart">Cart</Link>
             </li>
+              {/* History Purchase */}
+              <li className="nav-item">
+              <Link className="nav-link" to="/customer/history">History Purchase</Link>
+            </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/customer/update-profile">Update Profile</Link>
               </li>

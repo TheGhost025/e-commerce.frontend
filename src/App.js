@@ -13,6 +13,7 @@ import ProductDetailsCustomer from './compoenets/Customer/ProductDetailsCustomer
 import ProfileDetailsCustomer from './compoenets/Customer/ProfileDetailsCustomer';
 import Cart from './compoenets/Customer/Cart';
 import Purchase from './compoenets/Customer/purchase';
+import PurchaseHistory from './compoenets/Customer/history';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/customer" element={<Home />} />
+        <Route path="/customer/history" element={<PurchaseHistory />} />
         <Route path="/customer/cart" element={<Cart />} />
         <Route path="/customer/purchase" element={<Purchase />} />
         <Route path="/supplier/update-profile" element={<ProfileSupplierUpdate />}/>
