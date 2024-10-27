@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import CustomerNavBar from './CustomerNacBar';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -53,6 +55,10 @@ const Cart = () => {
     }
   };
 
+  const handleProceedToPurchase = () => {
+    navigate('/customer/purchase');
+  };
+
   return (
     <CustomerNavBar>
       <div className="container mt-4">
@@ -94,10 +100,14 @@ const Cart = () => {
                 </div>
               </div>
             ))}
+                      <button className="btn btn-primary mt-3" onClick={handleProceedToPurchase}>
+            Proceed to Purchase
+          </button>
           </div>
         ) : (
           <p className="text-center">Your cart is empty.</p>
         )}
+
       </div>
     </CustomerNavBar>
   );

@@ -73,7 +73,7 @@ const CustomerNavBar = ({ children }) => {
 
             {/* Products */}
             <li className="nav-item">
-              <Link className="nav-link" to="/products">Products</Link>
+              <Link className="nav-link" to="/customer">Products</Link>
             </li>
 
             {/* Cart */}
