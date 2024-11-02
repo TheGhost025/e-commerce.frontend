@@ -1,38 +1,440 @@
-.App {
-  text-align: center;
+/* Root Theme Colors */
+:root {
+  --primary-color: #6a11cb;
+  --secondary-color: #2575fc;
+  --button-color: #4a90e2;
+  --danger-color: #ff4d4d;
+  --info-color: #5bc0de;
+  --hover-color: #3b78d4;
+  --light-bg: #f5f5f5;
+  --text-color: #333;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Navbar Styling */
+.navbar {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.navbar .navbar-brand,
+.navbar .nav-link,
+.navbar .navbar-text {
+  color: #ffffff;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.navbar .nav-link:hover {
+  color: var(--hover-color);
+}
+
+.profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+}
+
+.logout-btn {
+  color: #ffffff;
+  background-color: transparent;
+  border: 1px solid #ff4d4d;
+}
+
+.logout-btn:hover {
+  background-color: #ff4d4d;
+  color: #ffffff;
+}
+
+/* Container Animation */
+.auth-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  animation: fadeIn 0.5s ease-in-out;
 }
 
-.App-link {
-  color: #61dafb;
+/* Form Styling */
+.auth-form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.7s ease-in-out;
+  width: 100%;
+  max-width: 400px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.form-group {
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.form-group label {
+  color: #333;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="file"],
+.form-group input[type="checkbox"] {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: #2575fc;
+  box-shadow: 0 0 10px rgba(37, 117, 252, 0.3);
+}
+
+/* Button Styling */
+.auth-button {
+  width: 100%;
+  padding: 10px;
+  background: #6a11cb;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.auth-button:hover {
+  background: #2575fc;
+  transform: scale(1.05);
+}
+
+/* Error Message Styling */
+.error-message {
+  color: red;
+  margin-top: 0.5rem;
+  animation: shake 0.5s ease;
+}
+
+/* Keyframes for Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    opacity: 1;
   }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+}
+
+/* Dashboard Container Styling */
+.container {
+  padding: 2rem;
+  background-color: var(--light-bg);
+  border-radius: 8px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Dashboard Title */
+h2 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+/* Card Styling */
+.card {
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Titles */
+.card-title {
+  color: var(--secondary-color);
+  font-weight: bold;
+}
+
+/* Card Buttons */
+.card a.btn-primary {
+  background-color: var(--button-color);
+  border-color: var(--button-color);
+  color: #fff;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.card a.btn-primary:hover {
+  background-color: var(--hover-color);
+  transform: scale(1.05);
+}
+
+.card a.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: #fff;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.card a.btn-success:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+/* Animation Delay */
+.animate__delay-1s {
+  animation-delay: 1s;
+}
+
+/* Table Styling */
+.table {
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table thead th {
+  background-color: var(--primary-color);
+  color: #fff;
+  text-align: center;
+}
+
+.table tbody tr:hover {
+  background-color: #f0f8ff;
+}
+
+/* Table Image Styling */
+.table img {
+  transition: transform 0.3s ease;
+}
+
+.table img:hover {
+  transform: scale(1.1);
+}
+
+/* Button Styling */
+.btn-success,
+.btn-primary,
+.btn-danger,
+.btn-info {
+  color: #fff;
+  border: none;
+  transition: all 0.3s ease;
+  margin: 0.2rem;
+}
+
+.btn-success {
+  background-color: #28a745;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.btn-primary {
+  background-color: var(--button-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--hover-color);
+}
+
+.btn-danger {
+  background-color: var(--danger-color);
+}
+
+.btn-danger:hover {
+  background-color: darkred;
+}
+
+.btn-info {
+  background-color: var(--info-color);
+}
+
+.btn-info:hover {
+  background-color: #49a0b5;
+}
+
+/* Button Animation */
+.btn {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.5s;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.1);
+  border-radius: 50%;
+}
+
+.btn:hover::after {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Add Button Styling */
+.btn.btn-success.mb-3 {
+  float: right;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.btn.btn-success.mb-3:hover {
+  transform: translateY(-3px);
+}
+
+/* Table Actions Styling */
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .card {
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .table {
+    font-size: 0.9rem;
+  }
+
+  .btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .btn.btn-success.mb-3 {
+    float: none;
+    width: 100%;
+    text-align: center;
+  }
+
+  .form-control {
+    font-size: 0.9rem;
+  }
+}
+
+/* Form Styling */
+form {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Input Styling */
+.form-control {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px var(--primary-color);
+}
+
+/* Label Styling */
+.form-label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+/* Button Styling */
+.btn-primary {
+  background-color: var(--button-color);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--hover-color);
+}
+
+/* Button Animation */
+.btn {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.5s;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.1);
+}
+
+.btn:hover::after {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Add Product Button Styling */
+.btn.btn-primary {
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.btn.btn-primary:hover {
+  transform: translateY(-3px);
 }

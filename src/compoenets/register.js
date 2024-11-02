@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from 'axios';
-import "../css/Auth.css";
+//import "../css/Auth.css";
 
 const Register = () => 
     {
@@ -13,6 +13,7 @@ const Register = () =>
         const [confPassword, setConfPassword] = useState('');
         const [image ,setImage] = useState(null);
         const [isSupplier,setIsSupplier] =useState(false);
+        const [error, setError] = useState('');
 
         const handleRegister = async (e) => {
             e.preventDefault();
@@ -37,7 +38,12 @@ const Register = () =>
                 });
                 navigate('/login');
             } catch (error) {
-                console.error('Registration failed:', error);
+              if (error.response && error.response.data && error.response.data.Errors) {
+                // Show detailed errors from backend
+                setError(error.response.data.Errors.join(', '));
+            } else {
+                setError('Registration failed.');
+            }
             }
           };
 
@@ -47,6 +53,7 @@ const Register = () =>
         
           return (
             <div className="auth-container">
+              {error && <div className="error-message">{error}</div>}
               <form onSubmit={handleRegister} className="auth-form">
                 <div className="form-group">
                   <label>First Name:</label>
@@ -94,8 +101,9 @@ const Register = () =>
                   />
                 </div>
                 <div className="form-group">
-                    <label>Profile Image:</label>
+                    <label className="form-label">Profile Image:</label>
                     <input
+                        className="form-control"
                         type="file"
                         onChange={handleFileChange}
                     />

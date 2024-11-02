@@ -1,0 +1,80 @@
+/* Dashboard Container Styling */
+.container {
+    padding: 2rem;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  /* Dashboard Title */
+  h2 {
+    font-size: 2.5rem;
+    color: #6a11cb;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Card Styling */
+  .card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #ffffff;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Card Titles */
+  .card-title {
+    color: #2575fc;
+    font-weight: bold;
+  }
+  
+  /* Card Buttons */
+  .card a.btn-primary {
+    background-color: #4a90e2;
+    border-color: #4a90e2;
+    color: #fff;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .card a.btn-primary:hover {
+    background-color: var(--hover-color);
+    transform: scale(1.05);
+  }
+  
+  .card a.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: #fff;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .card a.btn-success:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+  }
+  
+  /* Animation Delay */
+  .animate__delay-1s {
+    animation-delay: 1s;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .card {
+      margin-bottom: 1rem;
+    }
+  
+    h2 {
+      font-size: 2rem;
+    }
+  }
+  

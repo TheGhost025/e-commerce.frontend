@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from 'axios';
-import "../css/Auth.css";
+//import "../css/Auth.css";
 
 const Login = () =>
 {
@@ -69,7 +69,7 @@ const Login = () =>
                 required
               />
             </div>
-            {error && <div style={{ color: 'red' }}>{error}</div>}
+            {error && <div className="error-message">{error}</div>}
             <button type="submit" className="auth-button">Login</button>
           </form>
           <button onClick={() => navigate('/register')} className="auth-button">Go to Register</button>
