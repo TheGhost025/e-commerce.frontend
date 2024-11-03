@@ -25,7 +25,11 @@ const ProductDetailsCustomer = () => {
   }, [productId, token]);
 
   if (!product) {
-    return <div>Loading product details...</div>;
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+      </div>
+    );
   }
 
   const addToCart = async () => {
@@ -54,30 +58,37 @@ const ProductDetailsCustomer = () => {
 
   return (
     <CustomerNavBar>
-    <div className="container mt-4">
-      <h1>{product.name}</h1>
-      <div className="row">
-        <div className="col-md-6">
-          <img src={"https://localhost:44305"+product.imageURL} alt={product.name} className="img-fluid" />
-        </div>
-        <div className="col-md-6">
-          <h2>Price: ${product.price}</h2>
-          <p>{product.description}</p>
-          <p>{product.stock}</p>
+      <div className="container mt-4">
+        <h1>{product.name}</h1>
+        <div className="row">
+          <div className="col-md-6">
+            <img 
+              src={"https://localhost:44305" + product.imageURL} 
+              alt={product.name} 
+              className="img-fluid product-image" 
+            />
+          </div>
+          <div className="col-md-6">
+            <h2>Price: ${product.price}</h2>
+            <p>{product.description}</p>
+            <p>Stock: {product.stock}</p>
+            
+            <label htmlFor="quantity">Quantity:</label>
+            <input
+              id="quantity"
+              type="number"
+              min="1"
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+              className="form-control"
+            />
 
-          <label htmlFor="quantity">Quantity:</label>
-          <input
-            id="quantity"
-            type="number"
-            min="1"
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
-          />
-
-          <button onClick={addToCart}>Add to Cart</button>
+            <button onClick={addToCart} className="add-to-cart-button">
+              Add to Cart
+            </button>
+          </div>
         </div>
       </div>
-    </div>
     </CustomerNavBar>
   );
 };

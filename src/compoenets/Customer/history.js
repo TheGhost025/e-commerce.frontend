@@ -26,32 +26,30 @@ const PurchaseHistory = () => {
     fetchHistory();
   }, []);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
   return (
     <CustomerNavBar>
-      <div>
-        <h2>Purchase History</h2>
-        {history.length === 0 ? (
-          <p>No purchase history available.</p>
+       <div className="purchase-history-container">
+        <h2 className="heading">Purchase History</h2>
+        {loading ? (
+          <div className="loading-indicator"></div>
+        ) : history.length === 0 ? (
+          <p className="no-history">No purchase history available.</p>
         ) : (
-          <ul style={{ listStyleType: 'none', padding: 0 }}>
+          <ul className="history-list">
             {history.map((order) => (
-              <li key={order.orderId} style={{ border: '1px solid #ddd', margin: '10px 0', padding: '10px' }}>
+              <li key={order.orderId} className="history-item fade-in">
                 <h3>Order ID: {order.orderId}</h3>
                 <p>Date: {new Date(order.orderDate).toLocaleDateString()}</p>
                 <h4>Items:</h4>
-                <ul style={{ listStyleType: 'disc', marginLeft: '20px' }}>
+                <ul className="item-list">
                   {order.orderItems.map((item) => (
-                    <li key={item.productId} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                    <li key={item.productId} className="item-entry">
                       <img
                         src={`https://localhost:44305${item.productImageUrl}`}
                         alt={item.productName}
-                        style={{ width: '50px', height: '50px', marginRight: '10px' }}
+                        className="product-image bounce-in"
                       />
-                      <div>
+                      <div className="item-details">
                         <strong>{item.productName}</strong> - Quantity: {item.quantity} - Price: ${item.price.toFixed(2)}
                       </div>
                     </li>

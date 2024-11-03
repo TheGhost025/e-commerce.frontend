@@ -34,13 +34,13 @@ const ProductDetailsSupplier = () => {
         <div className="card">
           <div className="card-body">
             <h5 className="card-title">{product.name}</h5>
+            {product.imageURL && (
+              <img src={`https://localhost:44305${product.imageURL}`} alt={product.name} style={{ width: '200px', height: '200px' }} />
+            )}
             <p className="card-text"><strong>Description:</strong> {product.description}</p>
             <p className="card-text"><strong>Category:</strong> {product.category}</p>
             <p className="card-text"><strong>Price:</strong> ${product.price}</p>
             <p className="card-text"><strong>Stock:</strong> {product.stock}</p>
-            {product.imageURL && (
-              <img src={`https://localhost:44305${product.imageURL}`} alt={product.name} style={{ width: '200px', height: '200px' }} />
-            )}
           </div>
         </div>
       </div>
